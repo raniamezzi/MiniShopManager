@@ -1,0 +1,10 @@
+{
+  "produits": [
+    {"nom": "Téléphone"},
+    {"nom": "Casque Bluetooth"},
+    {"nom": "Montre connectée"},
+    {"nom": "Chargeur USB"},
+    {"nom": "PC"},
+    {"nom": "Haut-parleur"}
+  ]
+}

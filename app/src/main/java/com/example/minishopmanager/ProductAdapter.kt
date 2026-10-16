@@ -1,5 +1,6 @@
 package com.example.minishopmanager
 
+import android.content.ContentValues
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -25,13 +26,21 @@ class ProductAdapter(
         val btnBuy = view.findViewById<Button>(R.id.btnBuy)
 
         product?.let { currentProduct ->
-            // Affiche "Produit 1 : Téléphone", etc.
             tvProductName.text = "Produit ${position + 1} : ${currentProduct.name}"
             imgProduct.setImageResource(currentProduct.imageResId)
 
-            // Gestion du clic sur le bouton Acheter
             btnBuy.setOnClickListener {
-                Toast.makeText(context, "Produit sélectionné : ${currentProduct.name}", Toast.LENGTH_SHORT).show()
+                // 1. Insertion SQLite dans la table panier
+                val dbHelper = DBHelper(context)
+                val db = dbHelper.writableDatabase
+                val values = ContentValues().apply {
+                    put("nom", currentProduct.name)
+                }
+                db.insert("panier", null, values)
+                db.close()
+
+                // 2. Toast d'information
+                Toast.makeText(context, "Produit ajouté au panier : ${currentProduct.name}", Toast.LENGTH_SHORT).show()
             }
         }
 
