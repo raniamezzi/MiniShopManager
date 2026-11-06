@@ -27,16 +27,25 @@ class LoginActivity : AppCompatActivity() {
         cbRemember.isChecked = prefs.getBoolean("REMEMBER", false)
 
         btnLogin.setOnClickListener {
+            val username = etUsername.text.toString()
             val editor = prefs.edit()
+
+            // Sauvegarde le nom pour la session actuelle (affiché sur la MainActivity)
+            editor.putString("CURRENT_USER", username)
+
+            // Gère l'option "Se souvenir de moi"
             if (cbRemember.isChecked) {
-                editor.putString("USER", etUsername.text.toString())
+                editor.putString("USER", username)
                 editor.putBoolean("REMEMBER", true)
             } else {
-                editor.clear()
+                // Si non coché, supprime les identifiants enregistrés pour le prochain démarrage
+                editor.remove("USER")
+                editor.remove("REMEMBER")
             }
+
             editor.apply()
 
-            // Ouvrir la page d'accueil ou le catalogue
+            // Ouvrir la page d'accueil (MainActivity)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()

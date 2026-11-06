@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Fonds et surfaces -->
+    <color name="background">#F2F2F7</color>
+    <color name="surface">#FFFFFF</color>
+
+    <!-- Couleur primaire / accent (Bleu Apple) -->
+    <color name="primary">#007AFF</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <!-- Textes -->
+    <color name="text_primary">#1C1C1E</color>
+    <color name="text_secondary">#8E8E93</color>
+
+    <!-- États -->
+    <color name="success">#34C759</color>
+    <color name="on_success">#FFFFFF</color>
+
+    <!-- Divers -->
+    <color name="separator">#C6C6C8</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
 </resources>

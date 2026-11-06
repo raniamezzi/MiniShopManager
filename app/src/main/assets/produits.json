@@ -1,10 +1,52 @@
 {
   "produits": [
-    {"nom": "Téléphone"},
-    {"nom": "Casque Bluetooth"},
-    {"nom": "Montre connectée"},
-    {"nom": "Chargeur USB"},
-    {"nom": "PC"},
-    {"nom": "Haut-parleur"}
+    {
+      "id": 1,
+      "nom": "Téléphone",
+      "marque": "Samsung",
+      "prix": 1499.0,
+      "categorie": "Téléphonie",
+      "description": "Smartphone Samsung Galaxy A55 5G, écran AMOLED 6,6 pouces 120 Hz, 8 Go de RAM, 256 Go de stockage et batterie 5000 mAh."
+    },
+    {
+      "id": 2,
+      "nom": "Casque Bluetooth",
+      "marque": "Sony",
+      "prix": 349.0,
+      "categorie": "Audio",
+      "description": "Casque sans fil Sony WH-CH720N avec réduction de bruit active, 35 heures d'autonomie et micro intégré pour les appels."
+    },
+    {
+      "id": 3,
+      "nom": "Montre connectée",
+      "marque": "Xiaomi",
+      "prix": 259.0,
+      "categorie": "Objets connectés",
+      "description": "Montre connectée Xiaomi Redmi Watch 5 avec écran AMOLED, GPS intégré, suivi du sommeil et de l'activité, jusqu'à 18 jours d'autonomie."
+    },
+    {
+      "id": 4,
+      "nom": "Chargeur USB",
+      "marque": "Anker",
+      "prix": 59.0,
+      "categorie": "Accessoires",
+      "description": "Chargeur rapide Anker USB-C 30 W compact, compatible smartphones, tablettes et écouteurs, avec protection contre la surchauffe."
+    },
+    {
+      "id": 5,
+      "nom": "PC",
+      "marque": "HP",
+      "prix": 2399.0,
+      "categorie": "Informatique",
+      "description": "PC portable HP Pavilion 15 pouces, processeur Intel Core i5, 16 Go de RAM, SSD 512 Go, idéal pour les études et le travail."
+    },
+    {
+      "id": 6,
+      "nom": "Haut-parleur",
+      "marque": "JBL",
+      "prix": 449.0,
+      "categorie": "Audio",
+      "description": "Enceinte Bluetooth portable JBL Flip 6, étanche IP67, son puissant avec basses profondes et 12 heures d'autonomie."
+    }
   ]
 }
