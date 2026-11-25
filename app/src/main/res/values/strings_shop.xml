@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Marque -->
+    <string name="brand_name">MiniShop</string>
+    <string name="brand_tagline">Informatique &amp; Électroménager</string>
+    <string name="price_format">%1$s TND</string>
+    <string name="ok">OK</string>
+
+    <!-- Connexion -->
+    <string name="login_title">Connexion</string>
+    <string name="login_subtitle">Entrez votre prénom pour continuer</string>
+    <string name="login_hint_name">Votre prénom</string>
+    <string name="login_remember">Se souvenir de moi</string>
+    <string name="login_button">Connexion</string>
+    <string name="login_error_empty">Veuillez saisir votre prénom</string>
+
+    <!-- Accueil -->
+    <string name="home_greeting">Bonjour</string>
+    <string name="home_greeting_named">Bonjour, %1$s</string>
+    <string name="home_subtitle">Que cherchez-vous aujourd\'hui ?</string>
+    <string name="search_hint">Rechercher un produit, une marque…</string>
+    <string name="promo_badge">OFFRE DE LA SAISON</string>
+    <string name="promo_title">Électroménager &amp; Informatique</string>
+    <string name="promo_text">Découvrez notre sélection pour la maison et le bureau.</string>
+    <string name="promo_button">Découvrir</string>
+    <string name="home_categories">Catégories</string>
+    <string name="home_quick_access">Accès rapide</string>
+    <string name="tile_catalog">Catalogue</string>
+    <string name="tile_cart">Mon panier</string>
+    <string name="tile_favorites">Favoris</string>
+    <string name="tile_orders">Commandes</string>
+    <string name="cart_empty_short">Panier vide</string>
+
+    <plurals name="products_count">
+        <item quantity="one">%d produit</item>
+        <item quantity="other">%d produits</item>
+    </plurals>
+    <plurals name="cart_articles">
+        <item quantity="one">%d article</item>
+        <item quantity="other">%d articles</item>
+    </plurals>
+    <plurals name="favorites_count">
+        <item quantity="one">%d favori</item>
+        <item quantity="other">%d favoris</item>
+    </plurals>
+    <plurals name="orders_count">
+        <item quantity="one">%d commande</item>
+        <item quantity="other">%d commandes</item>
+    </plurals>
+
+    <!-- Catalogue -->
+    <string name="catalog_title">Catalogue</string>
+    <string name="favorites_title">Mes favoris</string>
+    <string name="filter_all">Tous</string>
+    <string name="empty_results">Aucun produit trouvé</string>
+    <string name="empty_favorites">Aucun favori pour le moment.\nAppuyez sur le cœur d\'un produit pour l\'ajouter.</string>
+    <string name="add_button">Ajouter</string>
+    <string name="added_to_cart">%1$s ajouté au panier</string>
+    <string name="added_to_cart_qty">%1$d × %2$s ajouté au panier</string>
+    <string name="snackbar_view">VOIR</string>
+
+    <!-- Détail produit -->
+    <string name="detail_description">Description</string>
+    <string name="detail_brand">Par %1$s</string>
+    <string name="detail_add_price">Ajouter · %1$s</string>
+    <string name="perk_delivery">Livraison rapide</string>
+    <string name="perk_warranty">Garantie 1 an</string>
+    <string name="perk_return">Retour 7 jours</string>
+    <string name="product_not_found">Produit introuvable</string>
+
+    <!-- Panier / paiement -->
+    <string name="cart_title">Mon panier</string>
+    <string name="cart_empty_title">Votre panier est vide</string>
+    <string name="cart_empty_text">Ajoutez des produits pour commencer.</string>
+    <string name="discover_catalog">Découvrir le catalogue</string>
+    <string name="subtotal_ht">Sous-total HT</string>
+    <string name="vat_label">TVA (%1$d %%)</string>
+    <string name="delivery_label">Livraison</string>
+    <string name="delivery_free">Gratuite</string>
+    <string name="delivery_hint">Plus que %1$s pour la livraison gratuite</string>
+    <string name="delivery_hint_free">Livraison offerte !</string>
+    <string name="total_ttc">Total TTC</string>
+    <string name="payment_mode">Mode de paiement</string>
+    <string name="pay_card">Carte bancaire</string>
+    <string name="pay_cash">Paiement à la livraison</string>
+    <string name="confirm_order">Confirmer la commande</string>
+    <string name="order_confirmed_title">Commande confirmée</string>
+    <string name="order_confirmed_message">Commande n°%1$d\nMontant : %2$s\nPaiement : %3$s\n\nMerci pour votre achat !</string>
+    <string name="cart_empty_toast">Votre panier est vide</string>
+    <string name="order_error">Erreur lors de la validation de la commande</string>
+    <string name="cart_read_error">Impossible de lire le panier</string>
+
+    <!-- Historique -->
+    <string name="history_title">Mes commandes</string>
+    <string name="history_empty_title">Aucune commande</string>
+    <string name="history_empty_text">Vos commandes confirmées apparaîtront ici.</string>
+    <string name="order_number">Commande n°%1$d</string>
+
+    <!-- Accessibilité -->
+    <string name="cd_back">Retour</string>
+    <string name="cd_logo">Logo MiniShop</string>
+    <string name="cd_avatar">Profil</string>
+    <string name="cd_favorite">Ajouter aux favoris</string>
+    <string name="cd_product_icon">Icône du produit</string>
+    <string name="cd_increase">Augmenter la quantité</string>
+    <string name="cd_decrease">Diminuer la quantité</string>
+    <string name="cd_remove">Retirer du panier</string>
+    <string name="cd_empty_icon">Illustration</string>
+
+</resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:background="@drawable/bg_card"
+    android:elevation="1dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <!-- Product Image Frame + Top-Right Wishlist Heart -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@drawable/bg_image_frame"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Product Image"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_app_logo" />
+
+        <ImageButton
+            android:id="@+id/btnWishlist"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:background="@drawable/bg_circle_white"
+            android:contentDescription="Toggle Wishlist"
+            android:elevation="2dp"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_heart_outline" />
+    </FrameLayout>
+
+    <!-- Category Tag -->
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="Smartphones"
+        android:textColor="@color/brand_blue"
+        android:textSize="11sp" />
+
+    <!-- Product Title -->
+    <TextView
+        android:id="@+id/tvProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-bold"
+        android:maxLines="1"
+        android:text="iPhone 16 Pro"
+        android:textColor="@color/text_primary"
+        android:textSize="14sp" />
+
+    <!-- Price + Quick Add "+" Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvProductPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-bold"
+            android:text="3,499 DT"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btnQuickAdd"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_pill_blue"
+            android:fontFamily="sans-serif-bold"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

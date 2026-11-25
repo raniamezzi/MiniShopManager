@@ -1,67 +1,107 @@
 package com.example.minishopmanager
 
-import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import java.text.NumberFormat
 import java.util.Locale
 
 class ProductAdapter(
-    private val context: Context,
-    private val products: List<Product>
-) : RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+    private var products: List<Product>,
+    private val dbHelper: DBHelper,
+    private var isGridMode: Boolean = true,
+    private val onDataChanged: (() -> Unit)? = null
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    private val dbHelper = DBHelper(context)
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imgProduct: ImageView = itemView.findViewById(R.id.imgProduct)
-        val tvBrand: TextView = itemView.findViewById(R.id.tvBrand)
-        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+    inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ivProductImage: ImageView = itemView.findViewById(R.id.ivProductImage)
+        val btnWishlist: ImageButton = itemView.findViewById(R.id.btnWishlist)
         val tvCategory: TextView = itemView.findViewById(R.id.tvCategory)
-        val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
-        val tvPrice: TextView = itemView.findViewById(R.id.tvPrice)
-        val btnBuy: Button = itemView.findViewById(R.id.btnBuy)
+        val tvProductName: TextView = itemView.findViewById(R.id.tvProductName)
+        val tvProductPrice: TextView = itemView.findViewById(R.id.tvProductPrice)
+        val btnQuickAdd: TextView = itemView.findViewById(R.id.btnQuickAdd)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_product, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        val layoutRes = if (isGridMode) R.layout.item_product_grid else R.layout.item_product_list
+        val view = LayoutInflater.from(parent.context).inflate(layoutRes, parent, false)
+        return ProductViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        val product = products[position]
+        val context = holder.itemView.context
+
+        holder.tvCategory.text = product.category
+        holder.tvProductName.text = product.name
+        holder.tvProductPrice.text = formatPriceDT(product.price)
+
+        val resId = JsonHelper.getDrawableId(context, product.image)
+        if (resId != 0) {
+            holder.ivProductImage.setImageResource(resId)
+        } else {
+            holder.ivProductImage.setImageResource(R.drawable.ic_app_logo)
+        }
+
+        val isFav = dbHelper.isFavorite(product.id)
+        holder.btnWishlist.setImageResource(
+            if (isFav) R.drawable.ic_heart_filled else R.drawable.ic_heart_outline
+        )
+
+        holder.btnWishlist.setOnClickListener {
+            if (dbHelper.isFavorite(product.id)) {
+                dbHelper.removeFavorite(product.id)
+                holder.btnWishlist.setImageResource(R.drawable.ic_heart_outline)
+                Toast.makeText(context, "Removed from Wishlist", Toast.LENGTH_SHORT).show()
+            } else {
+                dbHelper.addFavorite(product.id)
+                holder.btnWishlist.setImageResource(R.drawable.ic_heart_filled)
+                Toast.makeText(context, "Saved to Wishlist", Toast.LENGTH_SHORT).show()
+            }
+            onDataChanged?.invoke()
+        }
+
+        holder.btnQuickAdd.setOnClickListener {
+            dbHelper.addToCart(product.id, 1)
+            Toast.makeText(context, "${product.name} added to cart", Toast.LENGTH_SHORT).show()
+            (context as? MainActivity)?.updateCartBadge()
+            onDataChanged?.invoke()
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, ProductDetailActivity::class.java).apply {
+                putExtra("PRODUCT_ID", product.id)
+            }
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int = products.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val product = products[position]
+    fun updateProducts(newList: List<Product>) {
+        products = newList
+        notifyDataSetChanged()
+    }
 
-        holder.imgProduct.setImageResource(product.imageResId)
-        holder.tvBrand.text = product.brand
-        holder.tvProductName.text = product.name
-        holder.tvCategory.text = product.category
-        holder.tvDescription.text = product.description
-        holder.tvPrice.text = formatPrix(product.price)
-
-        holder.btnBuy.setOnClickListener {
-            // Insertion SQLite : produit_id, nom, prix et quantité (1 par défaut)
-            dbHelper.ajouterAuPanier(
-                produitId = product.id,
-                nom = product.name,
-                prix = product.price
-            )
-
-            Toast.makeText(
-                context,
-                "Produit ajouté au panier : ${product.name}",
-                Toast.LENGTH_SHORT
-            ).show()
+    fun setGridMode(grid: Boolean) {
+        if (isGridMode != grid) {
+            isGridMode = grid
+            notifyDataSetChanged()
         }
     }
 
-    private fun formatPrix(prix: Double): String {
-        return String.format(Locale.FRANCE, "%,.2f TND", prix)
+    companion object {
+        fun formatPriceDT(price: Double): String {
+            val formatted = NumberFormat.getNumberInstance(Locale.US).apply {
+                maximumFractionDigits = if (price % 1.0 == 0.0) 0 else 2
+            }.format(price)
+            return "$formatted DT"
+        }
     }
 }

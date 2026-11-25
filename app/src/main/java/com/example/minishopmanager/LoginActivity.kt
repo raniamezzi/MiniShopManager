@@ -1,53 +1,70 @@
 package com.example.minishopmanager
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 
 class LoginActivity : AppCompatActivity() {
-
-    private lateinit var prefs: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val etUsername = findViewById<EditText>(R.id.etUsername)
-        val cbRemember = findViewById<CheckBox>(R.id.cbRemember)
-        val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val prefs = PrefsHelper(this)
+        val btnBack = findViewById<ImageButton>(R.id.btnLoginBack)
+        val etName = findViewById<EditText>(R.id.etLoginName)
+        val etEmail = findViewById<EditText>(R.id.etLoginEmail)
+        val etPassword = findViewById<EditText>(R.id.etLoginPassword)
+        val btnSignIn = findViewById<AppCompatButton>(R.id.btnSubmitLogin)
 
-        prefs = getSharedPreferences("ShopPrefs", MODE_PRIVATE)
+        // Pre-fill saved account details if the user registered earlier
+        if (prefs.hasRegisteredAccount()) {
+            etName.setText(prefs.userName)
+            etEmail.setText(prefs.userEmail)
+        }
 
-        // Charger l'utilisateur si "Se souvenir de moi" était coché
-        etUsername.setText(prefs.getString("USER", ""))
-        cbRemember.isChecked = prefs.getBoolean("REMEMBER", false)
+        btnBack.setOnClickListener { finish() }
 
-        btnLogin.setOnClickListener {
-            val username = etUsername.text.toString()
-            val editor = prefs.edit()
+        btnSignIn.setOnClickListener {
+            val enteredName = etName.text.toString().trim()
+            val email = etEmail.text.toString().trim()
+            val password = etPassword.text.toString()
 
-            // Sauvegarde le nom pour la session actuelle (affiché sur la MainActivity)
-            editor.putString("CURRENT_USER", username)
-
-            // Gère l'option "Se souvenir de moi"
-            if (cbRemember.isChecked) {
-                editor.putString("USER", username)
-                editor.putBoolean("REMEMBER", true)
-            } else {
-                // Si non coché, supprime les identifiants enregistrés pour le prochain démarrage
-                editor.remove("USER")
-                editor.remove("REMEMBER")
+            if (email.isEmpty() || !email.contains("@")) {
+                etEmail.error = "Enter a valid email"
+                return@setOnClickListener
+            }
+            if (password.length < 4) {
+                etPassword.error = "Password must be at least 4 characters"
+                return@setOnClickListener
             }
 
-            editor.apply()
+            // If an account with this email already exists, verify the password
+            if (prefs.hasRegisteredAccount() && prefs.userEmail.equals(email, ignoreCase = true)) {
+                if (prefs.userPassword != password) {
+                    etPassword.error = "Incorrect password for this account"
+                    return@setOnClickListener
+                }
+                if (enteredName.isNotEmpty()) {
+                    prefs.userName = enteredName
+                }
+                prefs.isLoggedIn = true
+                Toast.makeText(this, "Welcome back, ${prefs.userName}!", Toast.LENGTH_SHORT).show()
+                finish()
+                return@setOnClickListener
+            }
 
-            // Ouvrir la page d'accueil (MainActivity)
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+            // Otherwise register & save the new account locally
+            val finalName = enteredName.ifEmpty { "Shopper" }
+            prefs.userName = finalName
+            prefs.userEmail = email
+            prefs.userPassword = password
+            prefs.isLoggedIn = true
+
+            Toast.makeText(this, "Account saved! Welcome, $finalName!", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

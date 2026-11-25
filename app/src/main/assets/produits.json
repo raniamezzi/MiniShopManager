@@ -1,52 +1,182 @@
-{
-  "produits": [
-    {
-      "id": 1,
-      "nom": "Téléphone",
-      "marque": "Samsung",
-      "prix": 1499.0,
-      "categorie": "Téléphonie",
-      "description": "Smartphone Samsung Galaxy A55 5G, écran AMOLED 6,6 pouces 120 Hz, 8 Go de RAM, 256 Go de stockage et batterie 5000 mAh."
-    },
-    {
-      "id": 2,
-      "nom": "Casque Bluetooth",
-      "marque": "Sony",
-      "prix": 349.0,
-      "categorie": "Audio",
-      "description": "Casque sans fil Sony WH-CH720N avec réduction de bruit active, 35 heures d'autonomie et micro intégré pour les appels."
-    },
-    {
-      "id": 3,
-      "nom": "Montre connectée",
-      "marque": "Xiaomi",
-      "prix": 259.0,
-      "categorie": "Objets connectés",
-      "description": "Montre connectée Xiaomi Redmi Watch 5 avec écran AMOLED, GPS intégré, suivi du sommeil et de l'activité, jusqu'à 18 jours d'autonomie."
-    },
-    {
-      "id": 4,
-      "nom": "Chargeur USB",
-      "marque": "Anker",
-      "prix": 59.0,
-      "categorie": "Accessoires",
-      "description": "Chargeur rapide Anker USB-C 30 W compact, compatible smartphones, tablettes et écouteurs, avec protection contre la surchauffe."
-    },
-    {
-      "id": 5,
-      "nom": "PC",
-      "marque": "HP",
-      "prix": 2399.0,
-      "categorie": "Informatique",
-      "description": "PC portable HP Pavilion 15 pouces, processeur Intel Core i5, 16 Go de RAM, SSD 512 Go, idéal pour les études et le travail."
-    },
-    {
-      "id": 6,
-      "nom": "Haut-parleur",
-      "marque": "JBL",
-      "prix": 449.0,
-      "categorie": "Audio",
-      "description": "Enceinte Bluetooth portable JBL Flip 6, étanche IP67, son puissant avec basses profondes et 12 heures d'autonomie."
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "name": "iPhone 16 Pro",
+    "category": "Smartphones",
+    "price": 3499,
+    "image": "img_iphone_16_pro",
+    "description": "6.3-inch Super Retina XDR display with A18 Pro chip, titanium frame, and 48MP Pro camera system.",
+    "storage": "256 GB",
+    "battery": "27 hrs",
+    "weight": "199 g",
+    "stock": 8
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S24 Ultra",
+    "category": "Smartphones",
+    "price": 3299,
+    "image": "img_galaxy_s24_ultra",
+    "description": "6.8-inch QHD+ AMOLED display with built-in S Pen, Snapdragon 8 Gen 3, and 200MP quad camera.",
+    "storage": "512 GB",
+    "battery": "30 hrs",
+    "weight": "232 g",
+    "stock": 10
+  },
+  {
+    "id": 3,
+    "name": "Google Pixel 9 Pro",
+    "category": "Smartphones",
+    "price": 2899,
+    "image": "img_pixel_9_pro",
+    "description": "Powered by Google Tensor G4 with pro-level triple camera system and ultra-bright Super Actua display.",
+    "storage": "256 GB",
+    "battery": "24 hrs",
+    "weight": "199 g",
+    "stock": 7
+  },
+  {
+    "id": 4,
+    "name": "Sony WH-1000XM5",
+    "category": "Audio",
+    "price": 1199,
+    "image": "img_sony_xm5",
+    "description": "Industry-leading noise canceling wireless headphones with 8 microphones, crystal-clear calls, and plush comfort.",
+    "storage": "N/A",
+    "battery": "30 hrs",
+    "weight": "250 g",
+    "stock": 14
+  },
+  {
+    "id": 5,
+    "name": "AirPods Pro 2",
+    "category": "Audio",
+    "price": 849,
+    "image": "img_airpods_pro_2",
+    "description": "H2 chip active noise cancellation, Adaptive Transparency, Personalized Spatial Audio, and USB-C MagSafe case.",
+    "storage": "N/A",
+    "battery": "30 hrs",
+    "weight": "51 g",
+    "stock": 18
+  },
+  {
+    "id": 6,
+    "name": "Bose QuietComfort Ultra",
+    "category": "Audio",
+    "price": 1349,
+    "image": "img_bose_qc_ultra",
+    "description": "Spatialized audio headphones with CustomTune sound calibration and world-class quiet mode.",
+    "storage": "N/A",
+    "battery": "24 hrs",
+    "weight": "253 g",
+    "stock": 9
+  },
+  {
+    "id": 7,
+    "name": "MacBook Air M3 13\"",
+    "category": "Laptops",
+    "price": 3899,
+    "image": "img_macbook_air_m3",
+    "description": "Ultra-thin fanless aluminum laptop with Apple M3 chip, 13.6-inch Liquid Retina display, and MagSafe charging.",
+    "storage": "512 GB",
+    "battery": "18 hrs",
+    "weight": "1.24 kg",
+    "stock": 6
+  },
+  {
+    "id": 8,
+    "name": "Dell XPS 13",
+    "category": "Laptops",
+    "price": 3599,
+    "image": "img_dell_xps_13",
+    "description": "Precision-machined aluminum ultrabook featuring Intel Core Ultra 7 and InfinityEdge FHD+ display.",
+    "storage": "512 GB",
+    "battery": "16 hrs",
+    "weight": "1.19 kg",
+    "stock": 5
+  },
+  {
+    "id": 9,
+    "name": "ASUS ROG Zephyrus G14",
+    "category": "Laptops",
+    "price": 4699,
+    "image": "img_asus_rog_g14",
+    "description": "Compact 14-inch OLED creator and gaming laptop with Ryzen 9 processor and RTX 4060 graphics.",
+    "storage": "1 TB",
+    "battery": "11 hrs",
+    "weight": "1.50 kg",
+    "stock": 4
+  },
+  {
+    "id": 10,
+    "name": "Apple Watch Series 10",
+    "category": "Wearables",
+    "price": 1449,
+    "image": "img_apple_watch_s10",
+    "description": "Thinnest Apple Watch ever with wide-angle OLED display, sleep apnea alerts, and fast charging.",
+    "storage": "64 GB",
+    "battery": "18 hrs",
+    "weight": "36 g",
+    "stock": 12
+  },
+  {
+    "id": 11,
+    "name": "Samsung Galaxy Watch 7",
+    "category": "Wearables",
+    "price": 999,
+    "image": "img_galaxy_watch_7",
+    "description": "Sapphire crystal smartwatch with BioActive health sensor, dual-frequency GPS, and Galaxy AI wellness insights.",
+    "storage": "32 GB",
+    "battery": "40 hrs",
+    "weight": "34 g",
+    "stock": 15
+  },
+  {
+    "id": 12,
+    "name": "Garmin Venu 3",
+    "category": "Wearables",
+    "price": 1599,
+    "image": "img_garmin_venu_3",
+    "description": "AMOLED fitness smartwatch with built-in speaker/mic, wheelchair mode, and up to 14 days of battery life.",
+    "storage": "8 GB",
+    "battery": "14 days",
+    "weight": "47 g",
+    "stock": 8
+  },
+  {
+    "id": 13,
+    "name": "Anker Prime 67W GaN Charger",
+    "category": "Accessories",
+    "price": 219,
+    "image": "img_anker_67w_charger",
+    "description": "Compact 3-port GaN wall charger (2 USB-C + 1 USB-A) capable of fast-charging laptops and phones simultaneously.",
+    "storage": "N/A",
+    "battery": "N/A",
+    "weight": "144 g",
+    "stock": 25
+  },
+  {
+    "id": 14,
+    "name": "Logitech MX Master 3S",
+    "category": "Accessories",
+    "price": 349,
+    "image": "img_logitech_mx_master",
+    "description": "Ergonomic wireless performance mouse with 8K DPI track-on-glass sensor, quiet clicks, and MagSpeed wheel.",
+    "storage": "N/A",
+    "battery": "70 days",
+    "weight": "141 g",
+    "stock": 20
+  },
+  {
+    "id": 15,
+    "name": "Samsung T7 Shield 1TB SSD",
+    "category": "Accessories",
+    "price": 429,
+    "image": "img_samsung_t7_ssd",
+    "description": "Rugged IP65 water- and dust-resistant portable NVMe SSD with 1,050 MB/s read/write speeds.",
+    "storage": "1 TB",
+    "battery": "N/A",
+    "weight": "98 g",
+    "stock": 16
+  }
+]

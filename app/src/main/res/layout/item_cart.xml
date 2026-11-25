@@ -1,56 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="@color/surface"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="1dp"
-    app:strokeWidth="0dp">
+    android:background="@drawable/bg_card"
+    android:elevation="1dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
 
+    <!-- Product Thumbnail -->
+    <FrameLayout
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:background="@drawable/bg_image_frame"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/ivCartItemImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Product"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_app_logo" />
+    </FrameLayout>
+
+    <!-- Title, Price & Stepper -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvCartName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Produit"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvCartDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="1 × 0,00 TND"
-                android:textColor="@color/text_secondary"
-                android:textSize="13sp" />
-        </LinearLayout>
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvCartTotal"
+            android:id="@+id/tvCartItemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-bold"
+            android:maxLines="1"
+            android:text="iPhone 16 Pro"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvCartItemPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:text="0,00 TND"
-            android:textColor="@color/text_primary"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif-bold"
+            android:text="3,499 DT"
+            android:textColor="@color/brand_blue"
+            android:textSize="13sp" />
+
+        <!-- Compact Quantity Stepper -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_input_field"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp">
+
+            <TextView
+                android:id="@+id/btnCartMinus"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/bg_circle_white"
+                android:fontFamily="sans-serif-bold"
+                android:gravity="center"
+                android:text="−"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvCartQty"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-bold"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btnCartPlus"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:background="@drawable/bg_circle_white"
+                android:fontFamily="sans-serif-bold"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp" />
+        </LinearLayout>
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+    <!-- Remove Trash Button -->
+    <ImageButton
+        android:id="@+id/btnCartRemove"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/bg_pill_danger"
+        android:contentDescription="Remove"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_trash"
+        app:tint="@color/status_danger" />
+
+</LinearLayout>

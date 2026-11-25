@@ -1,85 +1,97 @@
 package com.example.minishopmanager
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.RadioGroup
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.AppCompatButton
 
 class CheckoutActivity : AppCompatActivity() {
 
-    companion object {
-        // Taux de TVA appliqué aux prix du catalogue (considérés hors taxes)
-        private const val TVA_RATE = 0.19
-    }
-
-    private lateinit var dbHelper: DBHelper
+    private var selectedPayment = "Cash on Delivery"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_checkout)
 
-        dbHelper = DBHelper(this)
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewCart)
-        val tvEmpty = findViewById<TextView>(R.id.tvEmpty)
-        val tvSubtotal = findViewById<TextView>(R.id.tvSubtotal)
-        val tvTva = findViewById<TextView>(R.id.tvTva)
-        val tvTotal = findViewById<TextView>(R.id.tvTotal)
-        val rgPayment = findViewById<RadioGroup>(R.id.rgPayment)
-        val btnConfirm = findViewById<Button>(R.id.btnConfirm)
-
-        // Lecture du panier SQLite (liste vide en cas de problème, pour éviter tout crash)
-        val items = try {
-            dbHelper.getPanier()
-        } catch (e: Exception) {
-            Log.e("CheckoutActivity", "Erreur de lecture du panier", e)
-            Toast.makeText(this, "Impossible de lire le panier", Toast.LENGTH_SHORT).show()
-            emptyList()
+        val prefs = PrefsHelper(this)
+        if (!prefs.isLoggedIn) {
+            Toast.makeText(this, "Sign in required to place an order", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = CartAdapter(items)
+        setContentView(R.layout.activity_checkout)
 
-        // Calcul des totaux
-        val sousTotal = items.sumOf { it.total }
-        val tva = sousTotal * TVA_RATE
-        val totalTtc = sousTotal + tva
+        val dbHelper = DBHelper(this)
+        val cartItems = dbHelper.getCartItems()
 
-        tvSubtotal.text = formatTnd(sousTotal)
-        tvTva.text = formatTnd(tva)
-        tvTotal.text = formatTnd(totalTtc)
+        if (cartItems.isEmpty()) {
+            finish()
+            return
+        }
 
-        // Panier vide : message + bouton désactivé
-        if (items.isEmpty()) {
-            tvEmpty.visibility = View.VISIBLE
-            btnConfirm.isEnabled = false
-            btnConfirm.alpha = 0.5f
+        val btnBack = findViewById<ImageButton>(R.id.btnCheckoutBack)
+        val etAddress = findViewById<EditText>(R.id.etCheckoutAddress)
+        val etPhone = findViewById<EditText>(R.id.etCheckoutPhone)
+        val optCash = findViewById<LinearLayout>(R.id.optionPaymentCash)
+        val optCard = findViewById<LinearLayout>(R.id.optionPaymentCard)
+        val tvItemsList = findViewById<TextView>(R.id.tvCheckoutItemsList)
+        val tvTotal = findViewById<TextView>(R.id.tvCheckoutTotal)
+        val btnConfirm = findViewById<AppCompatButton>(R.id.btnConfirmOrder)
+
+        val subtotal = cartItems.sumOf { it.product.price * it.quantity }
+        val delivery = if (subtotal >= 300.0) 0.0 else 7.0
+        val grandTotal = subtotal + delivery
+
+        val summaryLines = cartItems.joinToString("\n") {
+            "${it.quantity}× ${it.product.name}  (${ProductAdapter.formatPriceDT(it.product.price * it.quantity)})"
+        }
+        tvItemsList.text = summaryLines
+        tvTotal.text = ProductAdapter.formatPriceDT(grandTotal)
+
+        btnBack.setOnClickListener { finish() }
+
+        optCash.setOnClickListener {
+            selectedPayment = "Cash on Delivery"
+            optCash.setBackgroundResource(R.drawable.bg_payment_selected)
+            optCard.setBackgroundResource(R.drawable.bg_payment_unselected)
+        }
+
+        optCard.setOnClickListener {
+            selectedPayment = "Credit / e-Dinar Card"
+            optCard.setBackgroundResource(R.drawable.bg_payment_selected)
+            optCash.setBackgroundResource(R.drawable.bg_payment_unselected)
         }
 
         btnConfirm.setOnClickListener {
-            val modePaiement = when (rgPayment.checkedRadioButtonId) {
-                R.id.rbCash -> "paiement à la livraison"
-                else -> "carte bancaire"
+            val address = etAddress.text.toString().trim()
+            val phone = etPhone.text.toString().trim()
+
+            if (address.isEmpty()) {
+                etAddress.error = "Please enter your delivery address"
+                return@setOnClickListener
+            }
+            if (phone.isEmpty()) {
+                etPhone.error = "Please enter a contact phone number"
+                return@setOnClickListener
             }
 
-            try {
-                dbHelper.viderPanier()
-                Toast.makeText(
-                    this,
-                    "Commande confirmée (${modePaiement}) : ${formatTnd(totalTtc)}. Merci pour votre achat !",
-                    Toast.LENGTH_LONG
-                ).show()
-                finish()
-            } catch (e: Exception) {
-                Log.e("CheckoutActivity", "Erreur lors de la validation de la commande", e)
-                Toast.makeText(this, "Erreur lors de la validation de la commande", Toast.LENGTH_SHORT).show()
-            }
+            val fullAddress = "$address ($phone)"
+            val compactSummary = cartItems.joinToString(", ") { "${it.quantity}× ${it.product.name}" }
+            val orderNum = dbHelper.placeOrder(grandTotal, fullAddress, selectedPayment, compactSummary)
+
+            AlertDialog.Builder(this)
+                .setTitle("Order Confirmed!")
+                .setMessage("Your order $orderNum for ${ProductAdapter.formatPriceDT(grandTotal)} has been placed.\n\nYou can track it anytime in your Profile tab.")
+                .setCancelable(false)
+                .setPositiveButton("Done") { _, _ -> finish() }
+                .show()
         }
     }
 }

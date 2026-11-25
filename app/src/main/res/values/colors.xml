@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#0F172A</color>
 
-    <!-- Fonds et surfaces -->
-    <color name="background">#F2F2F7</color>
+    <!-- Soft Modern Blue Palette (Main Names) -->
+    <color name="brand_blue">#3B82F6</color>
+    <color name="brand_blue_dark">#2563EB</color>
+    <color name="brand_blue_tint">#EFF6FF</color>
+    <color name="brand_blue_tint_strong">#DBEAFE</color>
+
+    <color name="bg_screen">#F6F8FC</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_image_frame">#F1F5F9</color>
+    <color name="border_subtle">#E2E8F0</color>
+
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_muted">#94A3B8</color>
+
+    <color name="status_success">#10B981</color>
+    <color name="status_success_tint">#ECFDF5</color>
+    <color name="status_danger">#EF4444</color>
+    <color name="status_danger_tint">#FEF2F2</color>
+
+    <!-- Aliases for Drawable Shapes -->
+    <color name="primary">#3B82F6</color>
+    <color name="primary_dark">#2563EB</color>
+    <color name="primary_tint">#EFF6FF</color>
+    <color name="primary_tint_strong">#DBEAFE</color>
+
+    <color name="background">#F6F8FC</color>
+    <color name="card">#FFFFFF</color>
     <color name="surface">#FFFFFF</color>
+    <color name="image_frame">#F1F5F9</color>
 
-    <!-- Couleur primaire / accent (Bleu Apple) -->
-    <color name="primary">#007AFF</color>
-    <color name="on_primary">#FFFFFF</color>
-
-    <!-- Textes -->
-    <color name="text_primary">#1C1C1E</color>
-    <color name="text_secondary">#8E8E93</color>
-
-    <!-- États -->
-    <color name="success">#34C759</color>
-    <color name="on_success">#FFFFFF</color>
-
-    <!-- Divers -->
-    <color name="separator">#C6C6C8</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
+    <color name="success">#10B981</color>
+    <color name="success_tint">#ECFDF5</color>
+    <color name="danger">#EF4444</color>
+    <color name="danger_tint">#FEF2F2</color>
 </resources>
